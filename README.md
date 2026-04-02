@@ -1,3 +1,25 @@
+# Install terraform on ubuntu Via HashiCorp's official APT repository (recommended)
+
+## 1. Install dependencies
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+
+## 2. Add HashiCorp GPG key
+wget -O- https://apt.releases.hashicorp.com/gpg | \
+  gpg --dearmor | \
+  sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+
+## 3. Add the HashiCorp repository
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+  https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+## 4. Update and install Terraform
+sudo apt-get update && sudo apt-get install -y terraform
+
+## 5. Verify installation
+terraform -version
+
+```
 🌐 Terraform AWS Infrastructure Setup
 
 This project demonstrates how to build AWS infrastructure using Terraform with a modular structure. It includes:
@@ -46,3 +68,4 @@ terraform validate
 terraform plan
 5. Apply Infrastructure
 terraform apply -auto-approve
+```
